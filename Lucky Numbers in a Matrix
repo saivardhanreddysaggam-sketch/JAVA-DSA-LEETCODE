@@ -1,0 +1,22 @@
+import java.util.*;
+class Solution {
+ public List<Integer> luckyNumbers(int[][] matrix) {
+ List<Integer> result = new ArrayList<>();
+ for (int r = 0; r < matrix.length; r++) {
+ int minCol = 0;
+ for (int c = 1; c < matrix[r].length; c++) {
+ if (matrix[r][c] < matrix[r][minCol]) minCol = c;
+ }
+ int candidate = matrix[r][minCol];
+ boolean largestInColumn = true;
+ for (int row = 0; row < matrix.length; row++) {
+ if (matrix[row][minCol] > candidate) {
+ largestInColumn = false;
+ break;
+ }
+ }
+ if (largestInColumn) result.add(candidate);
+ }
+ return result;
+ }
+}
